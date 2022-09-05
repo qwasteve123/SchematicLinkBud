@@ -1,4 +1,3 @@
-Attribute VB_Name = "BA_ArrayColConstant"
 
 Public Enum ArrMatList
 
@@ -136,8 +135,3 @@ Enum SamePortArr
     spPort2CoorY = 4
     
 End Enum
-    
-    
-
-
-
