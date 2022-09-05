@@ -1,7 +1,4 @@
-Attribute VB_Name = "A_Main"
 Public Sub ExportLinkBudget()
-Attribute ExportLinkBudget.VB_ProcData.VB_Invoke_Func = "F"
-    
 
     CheckError (ErrRemoveCircle)
     
@@ -43,7 +40,6 @@ Attribute ExportLinkBudget.VB_ProcData.VB_Invoke_Func = "F"
 End Sub
 
 Public Sub ShowLinkBudget()
-Attribute ShowLinkBudget.VB_ProcData.VB_Invoke_Func = "D"
 
     CheckError (ErrRemoveCircle)
     
@@ -95,6 +91,5 @@ Attribute ShowLinkBudget.VB_ProcData.VB_Invoke_Func = "D"
     FreqChoice = 0
     
     Application.ScreenUpdating = True
-
-
+    
 End Sub
