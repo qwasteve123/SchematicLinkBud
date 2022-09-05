@@ -1,4 +1,3 @@
-Attribute VB_Name = "EB_ExportExcelFile2"
 Sub FormalTemplate()
 Dim SectorNum As Integer
 
@@ -30,6 +29,11 @@ Sub InsertData(SectorNum As Integer)
             For j = 1 To ArrJumper
                 Cells(8 + SectorRowCount, j).Value = MaterialList(i, j)
             Next
+            
+            If Right(CStr(MaterialList(i, ArrAntLabel)), 1) = "0" And Left(MaterialList(i, ArrAntLabel), 1) <> "L" Then
+                Cells(8 + SectorRowCount, ArrAntLabel).NumberFormat = "0.00"
+            End If
+            Cells(8 + SectorRowCount, ArrAntLabel).HorizontalAlignment = xlHAlignRight
 
             For j = Arr2WaySplitter To ArrCombiner
                 Cells(8 + SectorRowCount, 1 + j).Value = MaterialList(i, j)
@@ -112,7 +116,7 @@ Sub RSRPLossTable()
     Range("AA3").Value = "dB"
 
     Range("Y4").Value = "Freq."
-    Range("Z4").Value = FreqChoice
+    Range("Z4").Value = Loss_ChoiceOfFreq
 
 End Sub
 
