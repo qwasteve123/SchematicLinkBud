@@ -1,4 +1,3 @@
-Attribute VB_Name = "EA_ExportExcelFile"
 Public Sub ExcelFile()
 Dim fd As FileDialog
 Dim file_path As Variant
@@ -15,13 +14,14 @@ Else
     GoTo exitsub
 End If
 
-On Error GoTo exitsub:
 Workbooks.Add.SaveAs fileName:=file_path & "\" & "link_buget.xlsx"
 'Environ ("userprofile") & "\Desktop\trial4.xlsx", ConflictResolution:=xlLocalSessionChanges
 
 Call ExcelFileInfo
 Call FormalTemplate
 Call BOMTemplate
+
+Range("A1") = "hello"
 
 Workbooks("link_buget.xlsx").Save
 Workbooks("link_buget.xlsx").Close
@@ -81,6 +81,18 @@ Range(Cells(2, 1), Cells(ShapeMaxRow + 1, shdColMax)) = ShapeDataList
 
 Range(Cells(1, 1), Cells(ShapeMaxRow + 1, shdColMax)).Columns.AutoFit
 
+
+For i = 1 To ShapeMaxRow
+    If Cells(i + 1, shdCompType) = "Omni Antenna" Then
+        If Cells(i + 1, shdItemNo) Mod 10 = 0 Then
+            Cells(i + 1, shdCompLabel).NumberFormat = "0.00"
+            Cells(i + 1, shdCompLabel).Value = Cells(i + 1, shdFloor) & "." & Cells(i + 1, shdItemNo)
+        End If
+    End If
+    Cells(i + 1, shdCompLabel).HorizontalAlignment = xlHAlignRight
+Next
+
+
 With ActiveSheet.Sort
 
     .SortFields.Add Key:=Range("A1"), Order:=xlAscending
@@ -89,6 +101,7 @@ With ActiveSheet.Sort
     .Apply
 
 End With
+
 
 '_____________________________________________________________________________________
 
@@ -122,6 +135,13 @@ Range(Cells(2, 1), Cells(AntCount, MatListColMax)) = MaterialList
 
 Range(Cells(1, 1), Cells(AntCount, MatListColMax)).Columns.AutoFit
 
+For i = 1 To AntCount
+    If Right(CStr(MaterialList(i, ArrAntLabel)), 1) = "0" And Left(MaterialList(i, ArrAntLabel), 1) <> "L" Then
+        Cells(i + 1, ArrAntLabel).NumberFormat = "0.00"
+    End I
+    Cells(i + 1, ArrAntLabel).HorizontalAlignment = xlHAlignRight
+Next
+
 With ActiveSheet.Sort
 
     .SortFields.Add Key:=Range("A1"), Order:=xlAscending
@@ -130,6 +150,9 @@ With ActiveSheet.Sort
     .Apply
 
 End With
+
+
+
 
 '_____________________________________________________________________________________
 
